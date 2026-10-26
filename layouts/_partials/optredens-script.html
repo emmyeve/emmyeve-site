@@ -1,0 +1,40 @@
+{{/*
+  De site wordt niet elke dag opnieuw gebouwd. Dit scriptje verplaatst optredens
+  die sinds de laatste keer bouwen voorbij zijn naar de eerdere optredens, houdt
+  het aantal zichtbare optredens per lijst gelijk (data-max) en laat het plusje werken.
+*/}}
+<script>
+(function () {
+  document.documentElement.classList.add("js");
+  function twee(n) { return (n < 10 ? "0" : "") + n; }
+  var d = new Date();
+  var vandaag = d.getFullYear() + "-" + twee(d.getMonth() + 1) + "-" + twee(d.getDate());
+  function inkorten(lijst) {
+    var max = parseInt(lijst.getAttribute("data-max"), 10);
+    if (!max) return 0;
+    var items = lijst.children;
+    for (var i = 0; i < items.length; i++) items[i].classList.toggle("ee-extra", i >= max);
+    return Math.max(0, items.length - max);
+  }
+  document.querySelectorAll("[data-agenda]").forEach(function (agenda) {
+    var komend = agenda.querySelector('[data-soort="komend"]');
+    var eerder = agenda.querySelector('[data-soort="eerder"]');
+    Array.prototype.slice.call(komend.children).reverse().forEach(function (li) {
+      if (li.getAttribute("data-datum") < vandaag) eerder.insertBefore(li, eerder.firstChild);
+    });
+    inkorten(komend);
+    var verborgen = inkorten(eerder);
+    var leeg = agenda.querySelector("[data-leeg]");
+    if (leeg) leeg.hidden = komend.children.length > 0;
+    var knop = agenda.querySelector("[data-uitklap]");
+    if (knop) {
+      knop.hidden = verborgen === 0;
+      knop.addEventListener("click", function () {
+        var open = eerder.classList.toggle("is-open");
+        knop.setAttribute("aria-expanded", open);
+        knop.textContent = open ? "−" : "+";
+      });
+    }
+  });
+})();
+</script>

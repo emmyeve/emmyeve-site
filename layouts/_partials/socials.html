@@ -1,0 +1,11 @@
+{{/* Iconen voor de social media links uit hugo.toml ([params.social]). */}}
+{{- $labels := dict "instagram" "Instagram" "spotify" "Spotify" "youtube" "YouTube" "facebook" "Facebook" "tiktok" "TikTok" -}}
+<ul class="ee-socials">
+  {{- range $naam := slice "instagram" "spotify" "youtube" "facebook" "tiktok" -}}
+    {{- with index site.Params.social $naam -}}
+      <li><a href="{{ . }}" target="_blank" rel="noopener" aria-label="{{ index $labels $naam }}" title="{{ index $labels $naam }}">
+        {{- with resources.Get (printf "ananke/socials/%s.svg" $naam) }}{{ .Content | safeHTML }}{{ end -}}
+      </a></li>
+    {{- end -}}
+  {{- end -}}
+</ul>

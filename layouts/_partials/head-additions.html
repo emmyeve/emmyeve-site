@@ -1,8 +1,9 @@
-{{/*
-  head-additions.html — the designated injection point at the end of <head>.
-
-  Site projects can override this partial directly, or use the "head-end" hook
-  to inject markup (meta tags, preloads, third-party <script>/<link> tags)
-  without overriding the partial. See the documentation on hooks & filters.
-*/}}
+<link rel="preload" href="{{ "fonts/montserrat-300.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<style>
+{{- range slice 300 400 600 }}
+@font-face { font-family: "Montserrat"; font-weight: {{ . }}; font-display: swap; src: url("{{ printf "fonts/montserrat-%d.woff2" . | relURL }}") format("woff2"); }
+{{- end }}
+</style>
+<link rel="apple-touch-icon" href="{{ "favicon.png" | relURL }}">
+<meta name="theme-color" content="#f4eee7">
 {{- partials.Include "hook.html" (dict "hook" "head-end" "context" .) -}}

@@ -1,0 +1,5 @@
+{{ define "main" }}
+  {{ partial "hero.html" (dict "page" .) }}
+  {{ partial "contact-blok.html" (dict "page" . "tekst" .Content) }}
+{{ end }}
+{{ define "footer" }}{{ partial "copyright.html" . }}{{ end }}

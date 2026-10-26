@@ -1,0 +1,9 @@
+{{/*
+  Een lijst optredens. "max" = hoeveel er zichtbaar zijn; de rest krijgt de klasse
+  ee-extra en is verborgen (op de LIVE-pagina uit te klappen met het plusje).
+*/}}
+<ul class="ee-shows{{ with .class }} {{ . }}{{ end }}" data-soort="{{ .soort }}"{{ with .max }} data-max="{{ . }}"{{ end }}>
+  {{- range $i, $show := .shows -}}
+    {{ partial "optreden.html" (dict "show" $show "extra" (and $.max (ge $i $.max))) }}
+  {{- end -}}
+</ul>

@@ -1,0 +1,25 @@
+{{/*
+  Maakt van een gewone Spotify- of YouTube-link een link die je kunt insluiten.
+  Gebruik: partial "embed-url.html" "https://open.spotify.com/album/..."
+*/}}
+{{- $url := strings.TrimSpace . -}}
+{{- $embed := "" -}}
+{{- if strings.Contains $url "spotify.com" -}}
+  {{- $u := urls.Parse $url -}}
+  {{- $path := strings.TrimPrefix "/embed" $u.Path -}}
+  {{- $path = replaceRE `^/intl-[a-z]+` "" $path -}}
+  {{- $embed = printf "https://open.spotify.com/embed%s?utm_source=generator" $path -}}
+{{- else if or (strings.Contains $url "youtube.com") (strings.Contains $url "youtu.be") -}}
+  {{- $u := urls.Parse $url -}}
+  {{- $q := $u.Query -}}
+  {{- with $q.Get "list" -}}
+    {{- $embed = printf "https://www.youtube-nocookie.com/embed/videoseries?list=%s" . -}}
+  {{- else -}}
+    {{- $id := $q.Get "v" -}}
+    {{- if not $id -}}{{- $id = path.Base $u.Path -}}{{- end -}}
+    {{- $embed = printf "https://www.youtube-nocookie.com/embed/%s" $id -}}
+  {{- end -}}
+{{- else if $url -}}
+  {{- $embed = $url -}}
+{{- end -}}
+{{- return $embed -}}

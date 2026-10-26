@@ -1,0 +1,11 @@
+{{/* Agenda in het kort op de homepage: de eerstvolgende 3 optredens en de laatste 2 (Verleden). */}}
+{{- $data := partial "optredens-data.html" . -}}
+<div class="ee-agenda" data-agenda>
+  <h3 class="ee-subkop">Komende optredens</h3>
+  {{ partial "optredens-lijst.html" (dict "shows" (first 6 $data.komend) "soort" "komend" "max" 3) }}
+  <p class="ee-leeg" data-leeg{{ if $data.komend }} hidden{{ end }}>Er staan op dit moment geen optredens gepland.</p>
+
+  <h3 class="ee-subkop">Verleden</h3>
+  {{ partial "optredens-lijst.html" (dict "shows" (first 2 $data.eerder) "soort" "eerder" "max" 2 "class" "ee-shows--eerder") }}
+</div>
+{{ partial "optredens-script.html" . }}

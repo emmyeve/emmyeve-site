@@ -1,50 +1,30 @@
+{{ define "title" }}{{ site.Title }} – {{ site.Params.description }}{{ end }}
 {{ define "main" }}
+  {{ partial "hero.html" (dict "page" . "groot" true) }}
 
-  {{- $config := site.Params.ananke.home -}}
-  {{- $text_alignment := "tc-l" -}}
-  {{- if eq $config.content_alignment "left" -}}
-    {{- $text_alignment = "tl-l" -}}
-  {{- else if eq $config.content_alignment "right" -}}
-    {{- $text_alignment = "tr-l" -}}
-  {{- end -}}
-
-  <article class="cf ph3 ph5-l pv3 pv4-l f4 {{ $text_alignment }} center measure-wide lh-copy nested-links {{ $.Param "text_color" | compare.Default "mid-gray" }}">
-    {{ .Content }}
-  </article>
-
-  {{/* Define a section to pull recent posts from. For Hugo 0.20 this will default to the section with the most number of pages. */}}
-  {{ $mainSections := site.Params.mainSections | compare.Default (collections.Slice "post") }}
-  {{ $show_recent_posts := site.Params.ananke.show_recent_posts }}
-  {{ $section := collections.Where $.Site.RegularPages "Section" "in" $mainSections }}
-  {{ $section_count := len $section }}
-
-  {{ if and ($show_recent_posts) (compare.Ge $section_count 1) }}
-    <div class="pa3 pa4-ns w-100 w-70-ns center">
-      {{ $n_posts := $.Param "recent_posts_number" | compare.Default 3 }}
-
-      <section class="w-100 mw8">
-        {{/* Range through the first $n_posts items of the section */}}
-        {{ range (collections.First $n_posts $section) }}
-          <div class="w-100 mb4 relative">
-            {{ .Render "summary-with-image" }}
-          </div>
-        {{ end }}
-      </section>
-
-      {{ if compare.Ge $section_count (math.Add $n_posts 1) }}
-        <section class="w-100">
-          <h1 class="f3">{{ lang.Translate "more" }}</h1>
-          {{/* Now, range through the next four after the initial $n_posts items. Nest the requirements, "after" then "first" on the outside */}}
-          {{ range (collections.First 4 (collections.After $n_posts $section))  }}
-            <h2 class="f5 fw4 mb4 dib {{ compare.Conditional (compare.Eq $.Site.Language.Direction "rtl") "ml3" "mr3" }}">
-              <a href="{{ .RelPermalink }}" class="link black dim">
-                {{ .Title }}
-              </a>
-            </h2>
-          {{ end }}
-        </section>
-      {{ end }}
-
+  <section class="ee-sectie" id="about">
+    <div class="ee-wrap ee-smal ee-midden">
+      <h2 class="ee-kop">{{ .Params.about_titel | default "ABOUT" }}</h2>
+      <div class="ee-tekst">{{ .Content }}</div>
     </div>
-  {{ end }}
+  </section>
+
+  {{- with .Params.spotify }}
+  <section class="ee-sectie ee-sectie--muziek" id="muziek">
+    <div class="ee-wrap ee-smal">
+      <h2 class="ee-kop">{{ $.Params.muziek_titel | default "MUSIC" }}</h2>
+      {{- with $.Params.muziek_tekst }}<p class="ee-intro">{{ . }}</p>{{ end }}
+      <iframe class="ee-spotify" src="{{ partial "embed-url.html" . }}" width="100%" height="452" frameborder="0" allowfullscreen
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Spotify-speler"></iframe>
+    </div>
+  </section>
+  {{- end }}
+
+  <section class="ee-sectie" id="live">
+    <div class="ee-wrap ee-smal">
+      <h2 class="ee-kop">{{ .Params.live_titel | default "LIVE" }}</h2>
+      {{ partial "optredens-kort.html" . }}
+      <p class="ee-meer"><a href="{{ "live/" | relURL }}">Bekijk de hele agenda →</a></p>
+    </div>
+  </section>
 {{ end }}

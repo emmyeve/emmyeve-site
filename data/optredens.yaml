@@ -1,0 +1,138 @@
+# Optredens van Emmy Eve.
+#
+# Een nieuw optreden toevoegen: kopieer een blok hieronder en pas het aan.
+# De volgorde maakt niet uit; de website sorteert zelf op datum en zet
+# optredens die voorbij zijn automatisch onder "Eerdere optredens".
+#
+#   - datum: 2027-03-14          # jaar-maand-dag (verplicht)
+#     tijd: "20:30"              # mag weg
+#     locatie: "Poppodium BIRD"  # verplicht
+#     plaats: "Rotterdam"        # mag weg
+#     info: "voorprogramma van ..."     # mag weg
+#     tickets: "https://..."     # link naar kaartverkoop, mag weg
+#
+# Let op: tekst met een dubbele punt (:) erin moet tussen "aanhalingstekens".
+
+- datum: 2026-08-08
+  locatie: "Eindeloos Eiland Festival"
+  plaats: "Kortgene (Zeeland)"
+
+- datum: 2026-06-11
+  locatie: "Rotterdam Late Night, Keilepand"
+  plaats: "Rotterdam"
+
+- datum: 2026-02-06
+  locatie: "Cinetol"
+  plaats: "Amsterdam"
+  info: "gastoptreden bij Ryann"
+
+- datum: 2026-02-01
+  locatie: "Gluren bij de Buren, Overschiesse Dorpsstraat"
+  plaats: "Rotterdam"
+  info: "3 shows"
+
+- datum: 2024-11-16
+  locatie: "De Doelen, Studio 1"
+  plaats: "Rotterdam"
+
+- datum: 2024-08-25
+  locatie: "Bij de Tuinman @ de Hoorneboeg"
+  plaats: "Hilversum"
+  info: "akoestisch"
+
+- datum: 2024-08-13
+  locatie: "Parkies festival"
+  plaats: "Breda"
+
+- datum: 2024-07-11
+  locatie: "Parkies festival"
+  plaats: "Bergen op Zoom"
+
+- datum: 2023-11-17
+  locatie: "Poppodium BIRD"
+  plaats: "Rotterdam"
+  info: "album release show"
+
+- datum: 2020-02-02
+  locatie: "Muziek Bij de Buren"
+  plaats: "Rotterdam"
+
+- datum: 2018-07-08
+  locatie: "Loeren bij de Boeren Festival"
+  plaats: "Het Goy"
+
+- datum: 2017-12-10
+  locatie: "Swan Market, Van Nelle Fabriek"
+  plaats: "Rotterdam"
+
+- datum: 2017-09-03
+  locatie: "Swan Market"
+  plaats: "Rotterdam"
+
+- datum: 2017-08-09
+  locatie: "Pleinbioscoop, Museumpark"
+  plaats: "Rotterdam"
+
+- datum: 2017-07-20
+  locatie: "Eendrachtfestival"
+  plaats: "Rotterdam"
+
+- datum: 2017-06-30
+  locatie: "Pannen op het dak festival"
+  plaats: "Breda"
+
+- datum: 2017-06-18
+  locatie: "Midzomergracht festival"
+  plaats: "Utrecht"
+
+- datum: 2017-06-17
+  locatie: "ToetiFroeti Festival, Theater ’t Plein"
+  plaats: "Ridderkerk"
+
+- datum: 2017-05-14
+  tijd: "11:30"
+  locatie: "Swan Market"
+  plaats: "Rotterdam"
+
+- datum: 2017-04-25
+  tijd: "22:30"
+  locatie: "TivoliVredenburg"
+  plaats: "Utrecht"
+  info: "na-programma Gavin DeGraw"
+
+- datum: 2016-11-11
+  tijd: "21:00"
+  locatie: "Hostel ROOM"
+  plaats: "Rotterdam"
+  info: "pre-birthday party, gratis entree"
+
+- datum: 2016-08-26
+  tijd: "20:30"
+  locatie: "Bibelot"
+  plaats: "Dordrecht"
+  info: "voorprogramma Danny Vera"
+
+- datum: 2016-07-26
+  tijd: "20:00"
+  locatie: "Paradiso (Grote Zaal)"
+  plaats: "Amsterdam"
+
+- datum: 2016-06-24
+  tijd: "21:00"
+  locatie: "Café Hofman"
+  plaats: "Utrecht"
+
+- datum: 2016-05-16
+  tijd: "15:00"
+  locatie: "Rollende Keukens"
+  plaats: "Amsterdam"
+
+- datum: 2016-04-24
+  tijd: "17:00"
+  locatie: "Café de Klappeij"
+  plaats: "Oosterhout"
+
+- datum: 2016-04-02
+  tijd: "21:00"
+  locatie: "STECK"
+  plaats: "Delft"

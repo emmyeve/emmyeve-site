@@ -1,0 +1,28 @@
+{{/*
+  Responsieve afbeelding uit assets/.
+  Gebruik: partial "afbeelding.html" (dict "src" "images/about.jpg" "alt" "..." "breedtes" (slice 400 800 1200) "sizes" "100vw" "class" "..." "lazy" true)
+*/}}
+{{- $img := resources.Get .src -}}
+{{- if not $img -}}
+  {{- warnf "Afbeelding %q niet gevonden in assets/" .src -}}
+{{- else -}}
+  {{- $breedtes := .breedtes | default (slice 480 960 1600) -}}
+  {{- $srcset := slice -}}
+  {{- $fallback := $img -}}
+  {{- range $breedtes -}}
+    {{- if le . $img.Width -}}
+      {{- $r := $img.Resize (printf "%dx webp" .) -}}
+      {{- $srcset = $srcset | append (printf "%s %dw" $r.RelPermalink .) -}}
+      {{- $fallback = $r -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $srcset -}}
+    {{- $fallback = $img.Process "webp" -}}
+    {{- $srcset = slice (printf "%s %dw" $fallback.RelPermalink $fallback.Width) -}}
+  {{- end -}}
+  <img src="{{ $fallback.RelPermalink }}" srcset="{{ delimit $srcset ", " }}" sizes="{{ .sizes | default "100vw" }}"
+       width="{{ $fallback.Width }}" height="{{ $fallback.Height }}" alt="{{ .alt }}"
+       {{- with .class }} class="{{ . }}"{{ end }}
+       {{- with .style }} style="{{ . | safeCSS }}"{{ end }}
+       {{- if .lazy }} loading="lazy"{{ end }} decoding="async">
+{{- end -}}

@@ -1,0 +1,22 @@
+{{/* Het groene contactvlak: e-mail, social media en inschrijven voor de mailinglijst. */}}
+<section class="ee-contact" id="contact">
+  <div class="ee-wrap ee-contact-grid">
+    <div>
+      {{- with .titel }}<h2 class="ee-kop ee-kop--licht">{{ . }}</h2>{{ end }}
+      {{- with .tekst }}<div class="ee-contact-intro">{{ . }}</div>{{ end }}
+      {{- with site.Params.email }}
+        <p class="ee-label">E-mail</p>
+        <p><a class="ee-mail" href="mailto:{{ . }}">{{ . }}</a></p>
+      {{- end }}
+      <p class="ee-label">Volg Emmy Eve</p>
+      {{ partial "socials.html" . }}
+    </div>
+    {{- with site.Params.nieuwsbrief_link }}
+      <div class="ee-nieuwsbrief">
+        <h3>{{ site.Params.nieuwsbrief_titel }}</h3>
+        <p>{{ site.Params.nieuwsbrief_tekst }}</p>
+        <a class="ee-knop" href="{{ . }}" target="_blank" rel="noopener">Schrijf je in</a>
+      </div>
+    {{- end }}
+  </div>
+</section>

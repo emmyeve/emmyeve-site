@@ -1,0 +1,60 @@
+# Instellingen van de website van Emmy Eve.
+# Na een wijziging: opnieuw bouwen met ./update.sh (zie README.md).
+
+baseURL = "https://eef.mecbrain.com/"
+title = "Emmy Eve"
+theme = "ananke"
+locale = "nl-NL"
+defaultContentLanguage = "nl"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "RSS"]
+
+[params]
+  description = "Verhalende popmuziek van Rotterdamse bodem"
+  favicon = "/favicon.png"
+  body_classes = "emmyeve"
+
+  # Contact: dit e-mailadres staat onderaan elke pagina en op de contactpagina.
+  email = "contact@emmyeve.com"
+
+  # Inschrijven voor de mailinglijst "Emmy's Extra's" (Mailchimp).
+  # Laat leeg ("") om het blok te verbergen.
+  nieuwsbrief_link = "http://eepurl.com/i1aAqk"
+  nieuwsbrief_titel = "Welkom bij de club"
+  nieuwsbrief_tekst = "Meld je gratis aan voor Emmy's Extra's en blijf op de hoogte van exclusieve content, nieuwe muziek en live events."
+
+  # Social media. Zet een regel op "" om dat icoon te verbergen.
+  [params.social]
+    instagram = "https://www.instagram.com/emmyevemusic/"
+    spotify = "https://open.spotify.com/artist/0eA3GIgzZiKukkzphXJbu5"
+    youtube = "https://www.youtube.com/@emmyevemusic"
+    facebook = "https://www.facebook.com/emmyeve/"
+    tiktok = ""
+
+  [params.ananke]
+    show_recent_posts = false
+    custom_css = ["emmyeve.css"]
+
+# Het menu bovenaan. Een webshop toevoegen? Zie README.md.
+[[menus.main]]
+  name = "HOME"
+  url = "/"
+  weight = 10
+[[menus.main]]
+  name = "LIVE"
+  url = "/live/"
+  weight = 20
+[[menus.main]]
+  name = "CONTACT"
+  url = "/contact/"
+  weight = 30
+
+[imaging]
+  resampleFilter = "Lanczos"
+  [imaging.jpeg]
+    quality = 82
+  [imaging.webp]
+    quality = 82
+
+[markup.goldmark.renderer]
+  unsafe = true

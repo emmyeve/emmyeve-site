@@ -1,0 +1,18 @@
+{{/*
+  Grote foto met titel. Leest uit de front matter van de pagina:
+  foto, foto_positie, foto_credit, title, ondertitel / description.
+  "groot" true = schermvullend (homepage).
+*/}}
+{{- $p := .page -}}
+<section class="ee-hero{{ if .groot }} ee-hero--groot{{ end }}">
+  {{- with $p.Params.foto -}}
+    {{ partial "afbeelding.html" (dict "src" . "alt" "" "breedtes" (slice 800 1400 2000 2400) "sizes" "100vw" "class" "ee-hero-img" "style" (printf "object-position: %s" ($p.Params.foto_positie | default "center"))) }}
+  {{- end -}}
+  <div class="ee-hero-tekst">
+    <h1 class="ee-hero-titel">{{ $p.Title }}</h1>
+    {{- with ($p.Params.ondertitel | default $p.Description) }}
+      <p class="ee-hero-sub">{{ . }}</p>
+    {{- end }}
+  </div>
+  {{- with $p.Params.foto_credit }}<span class="ee-credit">{{ . }}</span>{{ end }}
+</section>

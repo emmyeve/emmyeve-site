@@ -1,0 +1,150 @@
+/* Huisstijl Emmy Eve, bovenop het Ananke-thema. Kleuren pas je hier aan. */
+
+:root {
+  --ee-achtergrond: #f4eee7;
+  --ee-oranje: #e97509;
+  --ee-groen: #7d9a65;
+  --ee-tekst: #2f2a26;
+  --ee-tekst-zacht: #6e655d;
+  --ee-lijn: #e2d8cc;
+  --ee-donker: #2a2623;
+}
+
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ee-achtergrond);
+  color: var(--ee-tekst);
+  font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+main.pb7 { padding-bottom: 0; }
+a { color: var(--ee-oranje); }
+img { max-width: 100%; height: auto; display: block; }
+
+/* ---------- Menubalk ---------- */
+.ee-topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(244, 238, 231, 0.94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--ee-lijn);
+}
+.ee-nav {
+  display: flex; justify-content: center; align-items: center; gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.8rem; letter-spacing: 0.28em;
+}
+.ee-nav a { color: var(--ee-tekst); text-decoration: none; padding: 0.2rem 0 0.2rem 0.28em; border-bottom: 1px solid transparent; transition: color .2s, border-color .2s; }
+.ee-nav a:hover, .ee-nav a.is-active { color: var(--ee-oranje); border-bottom-color: var(--ee-oranje); }
+.ee-nav-sep { color: var(--ee-lijn); }
+
+/* ---------- Grote foto met titel ---------- */
+.ee-hero {
+  position: relative; overflow: hidden;
+  min-height: min(58vh, 38rem); display: flex; align-items: flex-end; justify-content: center;
+  background: var(--ee-donker); color: #fff; text-align: center;
+}
+.ee-hero--groot { min-height: min(calc(100vh - 3rem), 60rem); min-height: min(calc(100svh - 3rem), 60rem); }
+.ee-hero--groot .ee-hero-tekst { padding-bottom: clamp(3rem, 12vh, 8rem); }
+.ee-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ee-hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05) 40%, rgba(0,0,0,.35)); }
+.ee-hero-tekst { position: relative; z-index: 1; padding: 2.5rem 1rem; }
+.ee-hero-titel {
+  margin: 0; font-weight: 300; text-transform: uppercase;
+  font-size: clamp(2.2rem, 8vw, 5.5rem); letter-spacing: 0.45em; padding-left: 0.45em;
+  text-shadow: 0 2px 24px rgba(0,0,0,.25);
+}
+.ee-hero-sub { margin: 0.6rem 0 0; font-size: clamp(0.85rem, 2vw, 1.05rem); letter-spacing: 0.12em; opacity: .92; }
+.ee-credit { position: absolute; right: .8rem; bottom: .5rem; z-index: 1; font-size: .7rem; opacity: .7; }
+
+/* ---------- Secties ---------- */
+.ee-sectie { padding: clamp(3rem, 8vw, 6rem) 0; }
+.ee-sectie--muziek { background: #efe6db; }
+.ee-sectie--donker { background: var(--ee-donker); color: #f4eee7; }
+.ee-wrap { width: min(68rem, 100% - 2.5rem); margin: 0 auto; }
+.ee-smal { width: min(46rem, 100% - 2.5rem); }
+
+.ee-kop {
+  color: var(--ee-oranje); font-weight: 600; font-size: 1.1rem;
+  letter-spacing: 0.32em; margin: 0 0 1.5rem; text-transform: uppercase;
+}
+.ee-kop::after { content: ""; display: block; width: 2.5rem; height: 2px; background: currentColor; margin-top: .7rem; }
+.ee-kop--licht { color: var(--ee-achtergrond); }
+.ee-kop--klein { font-size: .9rem; }
+.ee-intro { color: var(--ee-tekst-zacht); margin: -0.5rem 0 1.5rem; }
+.ee-tekst p { margin: 0 0 1.1em; }
+.ee-noot { margin-top: 2rem; color: var(--ee-tekst-zacht); font-size: .95rem; }
+
+/* About: alleen tekst, gecentreerd */
+.ee-midden { text-align: center; }
+.ee-midden .ee-kop::after { margin-left: auto; margin-right: auto; }
+
+/* Muziek & video */
+.ee-spotify { display: block; border: 0; border-radius: 12px; }
+.ee-video { position: relative; aspect-ratio: 16 / 9; }
+.ee-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 6px; }
+
+/* Contact (groen vlak) */
+.ee-contact { background: var(--ee-groen); color: #fff; padding: clamp(3rem, 8vw, 5.5rem) 0; }
+.ee-contact a { color: #fff; }
+.ee-contact-grid { display: grid; gap: 2.5rem; }
+@media (min-width: 48em) { .ee-contact-grid { grid-template-columns: 1fr 1fr; align-items: center; } }
+.ee-contact-intro { margin-bottom: 1.5rem; max-width: 32rem; }
+.ee-contact-intro p { margin: 0; }
+.ee-label { margin: 1.4rem 0 .3rem; font-size: .75rem; letter-spacing: .25em; text-transform: uppercase; opacity: .85; }
+.ee-mail { font-size: 1.25rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.5); }
+.ee-mail:hover { border-bottom-color: #fff; }
+.ee-socials { list-style: none; margin: .4rem 0 0; padding: 0; display: flex; gap: .9rem; }
+.ee-socials a { display: inline-flex; width: 2.6rem; height: 2.6rem; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,.6); border-radius: 50%; transition: background .2s; }
+.ee-socials a:hover { background: rgba(255,255,255,.18); }
+.ee-socials svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
+.ee-socials svg title { display: none; }
+.ee-nieuwsbrief, .ee-vak { background: var(--ee-achtergrond); color: var(--ee-tekst); padding: 2rem; border-radius: 4px; }
+.ee-nieuwsbrief h3, .ee-vak h3 { margin: 0 0 .6rem; color: var(--ee-oranje); font-weight: 600; letter-spacing: .2em; text-transform: uppercase; font-size: 1rem; }
+.ee-nieuwsbrief p { margin: 0 0 1.4rem; }
+.ee-vak p { margin: 0; }
+.ee-vak--groen { background: var(--ee-groen); color: var(--ee-achtergrond); }
+.ee-vak--groen h3, .ee-vak--groen a { color: var(--ee-achtergrond); }
+.ee-boekingen { margin-top: 3rem; }
+.ee-nieuwsbrief .ee-knop { color: #fff; }
+
+.ee-knop {
+  display: inline-block; background: var(--ee-oranje); color: #fff; text-decoration: none;
+  padding: .75rem 1.5rem; border-radius: 2px; font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+  transition: filter .2s;
+}
+.ee-knop:hover { filter: brightness(1.08); color: #fff; }
+.ee-knop--klein { padding: .45rem .9rem; font-size: .7rem; }
+
+/* Agenda */
+.ee-shows { list-style: none; margin: 0 0 1rem; padding: 0; }
+.ee-show { display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0; border-bottom: 1px solid var(--ee-lijn); }
+.ee-show-datum { flex: 0 0 4.2rem; text-align: center; line-height: 1.1; }
+.ee-show-dag { display: block; font-size: 1.7rem; font-weight: 300; color: var(--ee-oranje); }
+.ee-show-maand { display: block; font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; }
+.ee-show-jaar { display: block; font-size: .68rem; color: var(--ee-tekst-zacht); }
+.ee-show-info { flex: 1; min-width: 0; }
+.ee-show-locatie { display: block; font-weight: 600; }
+.ee-show-details { display: block; color: var(--ee-tekst-zacht); font-size: .9rem; }
+.ee-leeg { color: var(--ee-tekst-zacht); font-style: italic; }
+.ee-eerder { margin-top: 3rem; }
+.ee-eerder-kop { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.ee-uitklap {
+  flex: 0 0 auto; width: 2.2rem; height: 2.2rem; margin-top: -.35rem;
+  border: 1px solid var(--ee-oranje); border-radius: 50%; background: none; color: var(--ee-oranje);
+  font: 300 1.4rem/1 "Montserrat", sans-serif; cursor: pointer; transition: background .2s, color .2s;
+}
+.ee-uitklap:hover { background: var(--ee-oranje); color: #fff; }
+.js .ee-shows:not(.is-open) > .ee-extra { display: none; }
+.ee-subkop { margin: 2rem 0 .3rem; font-size: .78rem; font-weight: 600; letter-spacing: .25em; text-transform: uppercase; color: var(--ee-tekst-zacht); }
+.ee-subkop:first-child { margin-top: 0; }
+.ee-meer { margin: 2rem 0 0; }
+.ee-meer a { font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; text-decoration: none; }
+.ee-meer a:hover { text-decoration: underline; }
+.ee-shows--eerder .ee-show { padding: .6rem 0; }
+.ee-shows--eerder .ee-show-dag { font-size: 1.2rem; color: var(--ee-tekst-zacht); }
+
+/* Voettekst */
+.ee-footer { text-align: center; padding: 1.4rem 1rem; font-size: .75rem; letter-spacing: .15em; color: var(--ee-tekst-zacht); }

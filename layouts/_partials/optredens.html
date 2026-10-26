@@ -1,0 +1,18 @@
+{{/* De volledige agenda op de LIVE-pagina. */}}
+{{- $data := partial "optredens-data.html" . -}}
+<div class="ee-agenda" data-agenda>
+  <h2 class="ee-kop">KOMENDE OPTREDENS</h2>
+  {{ partial "optredens-lijst.html" (dict "shows" $data.komend "soort" "komend") }}
+  <p class="ee-leeg" data-leeg{{ if $data.komend }} hidden{{ end }}>Er staan op dit moment geen optredens gepland. Schrijf je in voor de mailinglijst om als eerste te horen wanneer er nieuwe shows aankomen!</p>
+
+  {{- if $data.eerder }}
+  <div class="ee-eerder">
+    <div class="ee-eerder-kop">
+      <h2 class="ee-kop">EERDERE OPTREDENS</h2>
+      <button type="button" class="ee-uitklap" data-uitklap hidden aria-expanded="false" aria-label="Toon alle eerdere optredens">+</button>
+    </div>
+    {{ partial "optredens-lijst.html" (dict "shows" $data.eerder "soort" "eerder" "max" 4 "class" "ee-shows--eerder") }}
+  </div>
+  {{- end }}
+</div>
+{{ partial "optredens-script.html" . }}

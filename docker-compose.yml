@@ -1,0 +1,35 @@
+# Website Emmy Eve, via Traefik op https://eef.mecbrain.com
+#
+#   ./update.sh        site opnieuw bouwen en starten na een wijziging
+
+services:
+  emmyeve:
+    build:
+      context: .
+      args:
+        SITE_URL: https://eef.mecbrain.com/
+    image: emmyeve-website
+    container_name: emmyeve-website
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.emmyeve.rule=Host(`eef.mecbrain.com`)
+      - traefik.http.routers.emmyeve.entrypoints=websecure
+      - traefik.http.routers.emmyeve.tls.certresolver=myresolver
+      - traefik.http.routers.emmyeve.middlewares=my-geoblock@file,my-crowdsec@file
+      - traefik.http.routers.emmyeve.service=emmyeve
+      - traefik.http.services.emmyeve.loadbalancer.server.port=80
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+      start_interval: 1s
+
+networks:
+  traefik:
+    external: true

@@ -1,0 +1,22 @@
+{{- $s := .show -}}
+{{- $d := time.AsTime $s.datum -}}
+<li class="ee-show{{ if .extra }} ee-extra{{ end }}" data-datum="{{ $d.Format "2006-01-02" }}">
+  <div class="ee-show-datum">
+    <span class="ee-show-dag">{{ $d.Format "2" }}</span>
+    <span class="ee-show-maand">{{ $d | time.Format "Jan" }}</span>
+    <span class="ee-show-jaar">{{ $d.Format "2006" }}</span>
+  </div>
+  <div class="ee-show-info">
+    <span class="ee-show-locatie">{{ $s.locatie }}</span>
+    <span class="ee-show-details">
+      {{- $bits := slice -}}
+      {{- with $s.plaats }}{{ $bits = $bits | append . }}{{ end -}}
+      {{- with $s.tijd }}{{ $bits = $bits | append (printf "%s uur" .) }}{{ end -}}
+      {{- with $s.info }}{{ $bits = $bits | append . }}{{ end -}}
+      {{ delimit $bits " · " }}
+    </span>
+  </div>
+  {{- with $s.tickets }}
+    <a class="ee-knop ee-knop--klein" href="{{ . }}" target="_blank" rel="noopener">Tickets</a>
+  {{- end }}
+</li>

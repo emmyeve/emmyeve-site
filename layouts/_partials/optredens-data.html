@@ -1,0 +1,12 @@
+{{/* Verdeelt data/optredens.yaml in komende (vroegste eerst) en eerdere (laatste eerst). */}}
+{{- $vandaag := now.Format "2006-01-02" -}}
+{{- $komend := slice -}}
+{{- $eerder := slice -}}
+{{- range sort (hugo.Data.optredens | default slice) "datum" "desc" -}}
+  {{- if ge ((time.AsTime .datum).Format "2006-01-02") $vandaag -}}
+    {{- $komend = $komend | append . -}}
+  {{- else -}}
+    {{- $eerder = $eerder | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- return dict "komend" (sort $komend "datum" "asc") "eerder" $eerder -}}

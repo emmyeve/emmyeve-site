@@ -1,0 +1,30 @@
+{{ define "main" }}
+  {{ partial "hero.html" (dict "page" .) }}
+
+  <section class="ee-sectie">
+    <div class="ee-wrap ee-smal">
+      {{ partial "optredens.html" . }}
+
+      {{- with .Params.boekingen_titel }}
+      <div class="ee-vak ee-vak--groen ee-boekingen">
+        <h3>{{ . }}</h3>
+        {{ $.Params.boekingen_tekst | markdownify }}
+      </div>
+      {{- end }}
+    </div>
+  </section>
+
+  {{- with .Params.youtube }}
+  <section class="ee-sectie ee-sectie--donker">
+    <div class="ee-wrap ee-smal">
+      <h2 class="ee-kop">{{ $.Params.video_titel | default "LIVE BEELDEN" }}</h2>
+      <div class="ee-video">
+        <iframe src="{{ partial "embed-url.html" . }}" title="YouTube-video's" frameborder="0" loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+  {{- end }}
+{{ end }}
+{{/* Geen contactblok op de LIVE-pagina, alleen de copyright-regel. */}}
+{{ define "footer" }}{{ partial "copyright.html" . }}{{ end }}
