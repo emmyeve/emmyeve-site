@@ -1,35 +1,34 @@
-# Website Emmy Eve, via Traefik op https://eef.mecbrain.com
-#
-#   ./update.sh        site opnieuw bouwen en starten na een wijziging
+version: '3.8'
 
 services:
-  emmyeve:
-    build:
-      context: .
-      args:
-        SITE_URL: https://eef.mecbrain.com/
-    image: emmyeve-website
-    container_name: emmyeve-website
-    restart: unless-stopped
-    networks:
-      - traefik
-    labels:
-      - traefik.enable=true
-      - traefik.docker.network=traefik
-      - traefik.http.routers.emmyeve.rule=Host(`eef.mecbrain.com`)
-      - traefik.http.routers.emmyeve.entrypoints=websecure
-      - traefik.http.routers.emmyeve.tls.certresolver=myresolver
-      - traefik.http.routers.emmyeve.middlewares=my-geoblock@file,my-crowdsec@file
-      - traefik.http.routers.emmyeve.service=emmyeve
-      - traefik.http.services.emmyeve.loadbalancer.server.port=80
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://127.0.0.1/"]
-      interval: 30s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-      start_interval: 1s
+  db:
+    image: mysql:8.0
+    container_name: wordpress-eef-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password_here
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress_user
+      MYSQL_PASSWORD: wordpress_password_here
+    volumes:
+      # Stores all database files directly in your host path
+      - /home/planet/Docker/wp-eef/wordpress-local/db_data:/var/lib/mysql
 
-networks:
-  traefik:
-    external: true
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    container_name: wordpress-eef-wp
+    restart: always
+    ports:
+      - "192.168.1.250:1248:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress_user
+      WORDPRESS_DB_PASSWORD: wordpress_password_here
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      # Stores all WordPress files (wp-content, themes, uploads) in your host path
+      - /home/planet/Docker/wp-eef/wordpress-local/wp_data:/var/www/html
+      # Mounts your XML folder into the container so you can find it during import
+      - /home/planet/Docker/wp-eef/wordpress-local/import:/mnt/import
