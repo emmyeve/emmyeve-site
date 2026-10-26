@@ -1,0 +1,15 @@
+[servers]
+count=2
+
+[server0]
+url=http://cat.asw.cz/beta
+name=Test (external beta)
+products=av_oem,av_oemzfp,av_u3
+
+[server1]
+name=Download1 AVAST server
+url=http://download1.avast.com/iavs4x
+stats=http://download5.avast.com/cgi-bin/iavs4stats.cgi
+products=av_pro,av_net,av_mgm,av_srv,bart,av_ker,exav,av_pda_palm
+
+ASWSignA61A5BAE5BFAD708DF37020FD751CF873CCF334CE7F1A843041BE6BF4EF9C166EBBB88C758C57A6C5ASWSignA
